@@ -1,0 +1,23 @@
+import PyPDF2
+import os
+
+# Specify the directory containing the PDFs
+pdf_folder = r"C:\Users\natha\OneDrive\Documents\PdfFileMerger"
+
+# Initialize PdfMerger
+merger = PyPDF2.PdfMerger()
+
+# Iterate through all files in the directory and append PDFs to the merger
+for file in sorted(os.listdir(pdf_folder)):  # Sort to ensure consistent order
+    if file.endswith(".pdf"):
+        file_path = os.path.join(pdf_folder, file)
+        merger.append(file_path)
+
+# Define the output file path
+output_file = os.path.join(pdf_folder, "combinedBSUniDocs.pdf")
+
+# Write the merged PDF to the output file
+merger.write(output_file)
+merger.close()
+
+print(f"Merged PDF created successfully: {output_file}")
